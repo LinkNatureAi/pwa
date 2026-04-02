@@ -1,10 +1,12 @@
 {
-  "name": "LinkNature App",
-  "short_name": "LinkApp",
+  "name": "LinkNature App Pro",
+  "short_name": "LinkNature",
+  "description": "Your fast and secure gateway to LinkNatureAi.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj",
