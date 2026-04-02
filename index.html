@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkNature App</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<link rel="preconnect" href="https://scontent-del3-1.cdninstagram.com">
+
+<style>
+body {
+  margin: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
+}
+.brand-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  object-fit: cover;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.2);
+  transition: transform 0.2s;
+}
+.brand-logo:active {
+  transform: scale(0.95);
+}
+#installBtn {
+  position: fixed;
+  bottom: 30px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 255, 204, 0.4);
+  cursor: pointer;
+  display: none;
+  z-index: 100;
+}
+</style>
+</head>
+
+<body>
+
+<img src="https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj" 
+     onerror="this.onerror=null; this.src='https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546';" 
+     alt="LinkNatureAi Logo" 
+     class="brand-logo"
+     onclick="location.href='https://ip.linknatureai.workers.dev/712A6F46F15D6FEE5AED6668DF197AED'">
+
+<button id="installBtn">Install App</button>
+
+<script>
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("installBtn").style.display = "block";
+});
+
+document.getElementById("installBtn").onclick = async () => {
+  if (deferredPrompt) {
+    document.getElementById("installBtn").style.display = "none";
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  }
+};
+
+// Registered SW on load for better performance
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.error('SW Error:', err));
+  });
+}
+</script>
+
+</body>
+</html>
