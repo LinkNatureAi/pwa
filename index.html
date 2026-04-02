@@ -1,90 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LinkNature App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="LinkNature - Your AI Gateway">
+  
+  <title>LinkNature App</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://scontent-del3-1.cdninstagram.com">
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
+  <style>
+    :root {
+      --primary: #00ffcc;
+      --primary-glow: rgba(0, 255, 204, 0.4);
+      --bg-color: #0a0a0a;
+    }
 
-<link rel="preconnect" href="https://scontent-del3-1.cdninstagram.com">
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-<style>
-body {
-  margin: 0;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: sans-serif;
-}
-.brand-logo {
-  width: 150px;
-  height: 150px;
-  border-radius: 20px;
-  object-fit: cover;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.2);
-  transition: transform 0.2s;
-}
-.brand-logo:active {
-  transform: scale(0.95);
-}
-#installBtn {
-  position: fixed;
-  bottom: 30px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 25px;
-  background: #00ffcc;
-  color: #000;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 10px rgba(0, 255, 204, 0.4);
-  cursor: pointer;
-  display: none;
-  z-index: 100;
-}
-</style>
+    body {
+      margin: 0;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Ambient background glow */
+    .ambient-glow {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: var(--primary);
+      filter: blur(120px);
+      opacity: 0.15;
+      border-radius: 50%;
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.8); opacity: 0.1; }
+      100% { transform: scale(1.2); opacity: 0.25; }
+    }
+
+    /* Premium Logo Styling */
+    .brand-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand-logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 35px;
+      object-fit: cover;
+      cursor: pointer;
+      box-shadow: 0 10px 30px var(--primary-glow), inset 0 0 0 2px rgba(255,255,255,0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 255, 204, 0.6);
+    }
+
+    .brand-logo:active {
+      transform: scale(0.92);
+      box-shadow: 0 5px 15px var(--primary-glow);
+    }
+
+    /* Glassmorphism Install Button */
+    #installBtn {
+      position: fixed;
+      bottom: 40px;
+      padding: 14px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      background: rgba(0, 255, 204, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      display: none;
+      z-index: 100;
+      transition: all 0.3s ease;
+      display: flex; /* Kept flex for icon alignment, hidden by default via JS */
+      align-items: center;
+      gap: 8px;
+    }
+
+    #installBtn:hover {
+      background: var(--primary);
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px var(--primary-glow);
+    }
+  </style>
 </head>
 
 <body>
 
-<img src="https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj" 
-     onerror="this.onerror=null; this.src='https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546';" 
-     alt="LinkNatureAi Logo" 
-     class="brand-logo"
-     onclick="location.href='https://ip.linknatureai.workers.dev/712A6F46F15D6FEE5AED6668DF197AED'">
+  <div class="ambient-glow"></div>
 
-<button id="installBtn">Install App</button>
+  <div class="brand-container">
+    <img id="logoImg" 
+         src="https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj" 
+         alt="LinkNatureAi Logo" 
+         class="brand-logo">
+  </div>
 
-<script>
-let deferredPrompt;
+  <button id="installBtn" style="display: none;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    Install App
+  </button>
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById("installBtn").style.display = "block";
-});
+  <script>
+    // --- Image Fallback & Click Logic ---
+    const logoImg = document.getElementById('logoImg');
+    const fallbackUrl = "https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546";
+    
+    logoImg.onerror = () => { logoImg.src = fallbackUrl; };
+    logoImg.onclick = () => {
+      // Optional: Add a slight delay for the animation to play before redirecting
+      setTimeout(() => {
+        window.location.href = 'https://ip.linknatureai.workers.dev/712A6F46F15D6FEE5AED6668DF197AED';
+      }, 150);
+    };
 
-document.getElementById("installBtn").onclick = async () => {
-  if (deferredPrompt) {
-    document.getElementById("installBtn").style.display = "none";
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  }
-};
+    // --- PWA Installation Logic ---
+    let deferredPrompt;
+    const installBtn = document.getElementById("installBtn");
 
-// Registered SW on load for better performance
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(err => console.error('SW Error:', err));
-  });
-}
-</script>
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = "flex";
+    });
 
+    installBtn.onclick = async () => {
+      if (deferredPrompt) {
+        installBtn.style.display = "none";
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User ${outcome === 'accepted' ? 'accepted' : 'dismissed'} the install prompt`);
+        deferredPrompt = null;
+      }
+    };
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+      console.log('LinkNature App was installed.');
+    });
+
+    // --- Service Worker Registration ---
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('SW Registered:', reg.scope))
+          .catch(err => console.error('SW Error:', err));
+      });
+    }
+  </script>
 </body>
 </html>
