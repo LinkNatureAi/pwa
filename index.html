@@ -13,7 +13,7 @@
   <style>
     :root {
       --primary: #00ffcc;
-      --primary-glow: rgba(0, 255, 204, 0.6); /* Glow thoda bada kiya */
+      --primary-glow: rgba(0, 255, 204, 0.4);
       --bg-color: #0a0a0a;
     }
 
@@ -33,12 +33,13 @@
       overflow: hidden;
     }
 
+    /* Ambient background glow */
     .ambient-glow {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 250px;
+      height: 250px;
       background: var(--primary);
-      filter: blur(140px);
+      filter: blur(120px);
       opacity: 0.15;
       border-radius: 50%;
       animation: pulseGlow 4s ease-in-out infinite alternate;
@@ -56,9 +57,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px; /* Space thoda badha diya */
-      width: 100%;
-      padding: 0 20px;
+      gap: 20px;
     }
 
     .brand-logo {
@@ -73,7 +72,7 @@
 
     .brand-logo:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 255, 204, 0.8);
+      box-shadow: 0 15px 40px rgba(0, 255, 204, 0.6);
     }
 
     .brand-logo:active {
@@ -81,35 +80,7 @@
       box-shadow: 0 5px 15px var(--primary-glow);
     }
 
-    /* 🔥 YAHAN HAI TUMHARA NAYA HIGHLIGHTED INPUT BOX 🔥 */
-    .dynamic-input {
-      position: relative;
-      z-index: 999;
-      width: 100%;
-      max-width: 320px;
-      padding: 18px 20px;
-      background: rgba(255, 255, 255, 0.15); /* Thoda bright background */
-      border: 2px solid var(--primary); /* Bright cyan border */
-      border-radius: 30px;
-      color: #fff;
-      font-size: 16px;
-      text-align: center;
-      outline: none;
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); /* Hamesha glow karega */
-      transition: all 0.3s ease;
-    }
-
-    .dynamic-input::placeholder {
-      color: rgba(255, 255, 255, 0.7); /* Placeholder ab zyada clear dikhega */
-      font-weight: 500;
-    }
-
-    .dynamic-input:focus {
-      border-color: #fff;
-      box-shadow: 0 0 30px var(--primary-glow);
-      background: rgba(255, 255, 255, 0.2);
-    }
-
+    /* Glassmorphism Install Button */
     #installBtn {
       position: fixed;
       bottom: 40px;
@@ -150,12 +121,10 @@
          src="https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj" 
          alt="LinkNatureAi Logo" 
          class="brand-logo"
-         title="Click here to go to your link!">
-         
-    <input type="text" id="userLink" class="dynamic-input" placeholder="Yahan link paste karein 👇" autocomplete="off">
+         title="Click to paste your link!">
   </div>
 
-  <button id="installBtn">
+  <button id="installBtn" style="display: none;">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
       <polyline points="7 10 12 15 17 10"></polyline>
@@ -166,29 +135,31 @@
 
   <script>
     const logoImg = document.getElementById('logoImg');
-    const linkInput = document.getElementById('userLink');
     const fallbackUrl = "https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546";
     
     logoImg.onerror = () => { logoImg.src = fallbackUrl; };
     
+    // 🔥 POPUP DIALOG FOR DYNAMIC LINK 🔥
     logoImg.onclick = () => {
-      let finalUrl = linkInput.value.trim();
+      // Ye code screen par ek popup box layega link mangne ke liye
+      let userLink = prompt("Apna dynamic link yahan paste karein:", "");
       
-      if (!finalUrl) {
-        alert("Pehle apna link paste karo!");
-        linkInput.focus();
-        return;
+      if (userLink !== null && userLink.trim() !== "") {
+        userLink = userLink.trim();
+        
+        // Agar "http" nahi lagaya hai toh apne aap laga dega
+        if (!/^https?:\/\//i.test(userLink)) {
+          userLink = 'https://' + userLink;
+        }
+        
+        // Naye link par bhej dega
+        window.location.href = userLink;
+      } else if (userLink === "") {
+        alert("Bhai, aapne koi link nahi daala! Kripya link paste karein.");
       }
-
-      if (!/^https?:\/\//i.test(finalUrl)) {
-        finalUrl = 'https://' + finalUrl;
-      }
-
-      setTimeout(() => {
-        window.location.href = finalUrl;
-      }, 150);
     };
 
+    // --- PWA Installation Logic ---
     let deferredPrompt;
     const installBtn = document.getElementById("installBtn");
 
@@ -213,6 +184,7 @@
       console.log('LinkNature App was installed.');
     });
 
+    // --- Service Worker Registration ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
