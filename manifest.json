@@ -7,22 +7,16 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546",
-      "sizes": "150x150",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
-    },
-    {
       "src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
