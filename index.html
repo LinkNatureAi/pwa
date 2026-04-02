@@ -13,7 +13,7 @@
   <style>
     :root {
       --primary: #00ffcc;
-      --primary-glow: rgba(0, 255, 204, 0.4);
+      --primary-glow: rgba(0, 255, 204, 0.6); /* Glow thoda bada kiya */
       --bg-color: #0a0a0a;
     }
 
@@ -33,13 +33,12 @@
       overflow: hidden;
     }
 
-    /* Ambient background glow */
     .ambient-glow {
       position: absolute;
-      width: 250px;
-      height: 250px;
+      width: 300px;
+      height: 300px;
       background: var(--primary);
-      filter: blur(120px);
+      filter: blur(140px);
       opacity: 0.15;
       border-radius: 50%;
       animation: pulseGlow 4s ease-in-out infinite alternate;
@@ -51,14 +50,13 @@
       100% { transform: scale(1.2); opacity: 0.25; }
     }
 
-    /* Premium Logo & Input Styling */
     .brand-container {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 25px;
+      gap: 30px; /* Space thoda badha diya */
       width: 100%;
       padding: 0 20px;
     }
@@ -75,7 +73,7 @@
 
     .brand-logo:hover {
       transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 255, 204, 0.6);
+      box-shadow: 0 15px 40px rgba(0, 255, 204, 0.8);
     }
 
     .brand-logo:active {
@@ -83,33 +81,35 @@
       box-shadow: 0 5px 15px var(--primary-glow);
     }
 
-    /* New Dynamic Input Field */
+    /* 🔥 YAHAN HAI TUMHARA NAYA HIGHLIGHTED INPUT BOX 🔥 */
     .dynamic-input {
+      position: relative;
+      z-index: 999;
       width: 100%;
       max-width: 320px;
-      padding: 15px 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(0, 255, 204, 0.3);
-      border-radius: 25px;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.15); /* Thoda bright background */
+      border: 2px solid var(--primary); /* Bright cyan border */
+      border-radius: 30px;
       color: #fff;
       font-size: 16px;
       text-align: center;
       outline: none;
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); /* Hamesha glow karega */
       transition: all 0.3s ease;
     }
 
     .dynamic-input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.7); /* Placeholder ab zyada clear dikhega */
+      font-weight: 500;
     }
 
     .dynamic-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 20px var(--primary-glow);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: #fff;
+      box-shadow: 0 0 30px var(--primary-glow);
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Glassmorphism Install Button */
     #installBtn {
       position: fixed;
       bottom: 40px;
@@ -150,9 +150,9 @@
          src="https://yt3.googleusercontent.com/T4wPs6t6pnFsN1nq6FlHVWV-5hDl0ALIOOW37kkAWteXib2pKRSC7rX3bZV16--ZGDzx9W0l=s160-c-k-c0x00ffffff-no-rj" 
          alt="LinkNatureAi Logo" 
          class="brand-logo"
-         title="Click to go to your link!">
+         title="Click here to go to your link!">
          
-    <input type="text" id="userLink" class="dynamic-input" placeholder="Paste your link here & click logo" autocomplete="off">
+    <input type="text" id="userLink" class="dynamic-input" placeholder="Yahan link paste karein 👇" autocomplete="off">
   </div>
 
   <button id="installBtn">
@@ -165,7 +165,6 @@
   </button>
 
   <script>
-    // --- Image Fallback & Dynamic Click Logic ---
     const logoImg = document.getElementById('logoImg');
     const linkInput = document.getElementById('userLink');
     const fallbackUrl = "https://scontent-del3-1.cdninstagram.com/v/t51.2885-19/364188520_768879818572012_7916289392203749052_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-del3-1.cdninstagram.com&_nc_cat=104&_nc_oc=Q6cZ2QH3hZLJfzkqoXS-0YSBNuLxAnrWqo_JlpXR8iemw-OLAbgvbqJDJiMYUfwU9bn5nqKQfUayW3tv6JXLFHCX6t3i&_nc_ohc=8VJEnQeUYD4Q7kNvwFXsvea&_nc_gid=feOrzVrLgI6jwckVNvZ0tw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfxPLRLHCFBLXsYTakXbIfhfQ-SGZplxbcgtzimWfeHfMA&oe=69B05B50&_nc_sid=8b3546";
@@ -175,25 +174,21 @@
     logoImg.onclick = () => {
       let finalUrl = linkInput.value.trim();
       
-      // Check if user pasted anything
       if (!finalUrl) {
         alert("Pehle apna link paste karo!");
         linkInput.focus();
         return;
       }
 
-      // Automatically add https:// if the user forgets
       if (!/^https?:\/\//i.test(finalUrl)) {
         finalUrl = 'https://' + finalUrl;
       }
 
-      // Redirect after a small animation delay
       setTimeout(() => {
         window.location.href = finalUrl;
       }, 150);
     };
 
-    // --- PWA Installation Logic ---
     let deferredPrompt;
     const installBtn = document.getElementById("installBtn");
 
@@ -218,7 +213,6 @@
       console.log('LinkNature App was installed.');
     });
 
-    // --- Service Worker Registration ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
